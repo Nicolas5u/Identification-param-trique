@@ -2,10 +2,9 @@
 %% DE L'AXE 2 POUR DES MOUVEMENTS A VITESSE CONSTANTE
 %% G. MOREL - 29-12-05.
 %% M. Khoramshahi 02-02-2023
-%% M. BONDIL 18-09-2026
 
 close all
-clc
+%clc
 clear all; %% efface toutes les variables existantes
 load releve_vit_cste_axe1; %% charge les relevés expérimentaux
 
@@ -16,8 +15,7 @@ N2=4.5; %% inverse du rapport de réduction de l'axe 2.
 kc1=0.0525;
 N1=20.25;
 
-n = size(q1);
-N = n(1);
+N = length(q1)
 Y = zeros(N, 4);
 u = zeros(N, 1);
 
@@ -26,8 +24,9 @@ for k=1:N
     Y(k,:) = [cos(q1(k)), sign(qp1(k)), qp1(k), 1];
     u(k) =   N1*kc1*i1(k);
 end
+
 %% Calcul des paramètres
-p= Y\u;
+p=Y\u;
 
 %% Affichage des résultats.
 format long

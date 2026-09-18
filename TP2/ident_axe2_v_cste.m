@@ -4,13 +4,13 @@
 %% M. Khoramshahi 02-02-2023
 
 close all
-clc
+%clc
 clear all; %% efface toutes les variables existantes
-load releve_vit_cste_axe2; %% charge les relevés expérimentaux
+load releve_vit_cste_axe2; %% charge les relevÃ©s expÃ©rimentaux
 
-%% Paramètres connus a priori:
+%% ParamÃ¨tres connus a priori:
 kc2=0.0525; %% constante de couple de l'axe 2.
-N2=4.5; %% inverse du rapport de réduction de l'axe 2.
+N2=4.5; %% inverse du rapport de rÃ©duction de l'axe 2.
 
 kc1=0.0525;
 N1=20.25;
@@ -24,23 +24,24 @@ for k=1:N
     Y(k,:) = [cos(q2(k)), sign(qp2(k)), qp2(k), 1];
     u(k) =   N2*kc2*i2(k);
 end
-%% Calcul des paramètres
-p= Y\u;
 
-%% Affichage des résultats.
+%% Calcul des paramÃ¨tres
+p=Y\u;
+
+%% Affichage des rÃ©sultats.
 format long
-disp('Paramètres estimés à partir des données brutes :');
+disp('ParamÃ¨tres estimÃ©s Ã  partir des donnÃ©es brutes :');
 p'
 
 figure(1)
 clf; %% clear figure
 h=plot3(q2,qp2,kc2*N2*i2,'x');
 set(h,'LineWidth',0.5);
-hold on; %% permet de conserver le graphique et d'en ajouter d'autres sur la même fig.
+hold on; %% permet de conserver le graphique et d'en ajouter d'autres sur la mÃªme fig.
 h=plot3(q2,qp2,Y*p,'.');
 set(h,'LineWidth',1.5);
-title('Résultats de l''identification sans filtrage');
-legend('\Gamma_2 non filtré', 'modèle');
+title('RÃ©sultats de l''identification sans filtrage');
+legend('\Gamma_2 non filtrÃ©', 'modÃ¨le');
 grid on;
 xlabel('$q_2$','Interpreter','latex')
 ylabel('$\dot{q}_2$','Interpreter','latex')
